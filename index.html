@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="listaTelefonica">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .p-5.mb-4.bg-light.rounded-3 {
+        width: 400px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+      }
+    </style>
+
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.css" />
+    <title>Document</title>
+    <script src="lib/angular/angular.js"></script>
+    <script>
+      angular.module("listaTelefonica", []);
+      angular
+        .module("listaTelefonica")
+        .controller("listaTelefonicaCtrl", function ($scope) {
+          $scope.app = "Lista Telefônica";
+        });
+    </script>
+  </head>
+  <body ng-controller="listaTelefonicaCtrl">
+    <div class="p-5 mb-4 bg-light rounded-3">
+      <h4 ng-bind="app"></h4>
+    </div>
+  </body>
+</html>
