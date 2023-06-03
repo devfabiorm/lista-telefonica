@@ -12,6 +12,14 @@
         margin-right: auto;
         margin-top: 20px;
       }
+
+      table {
+        margin-top: 20px;
+      }
+
+      .form-control {
+        margin-bottom: 10px;
+      }
     </style>
 
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.css" />
@@ -23,12 +31,60 @@
         .module("listaTelefonica")
         .controller("listaTelefonicaCtrl", function ($scope) {
           $scope.app = "Lista Telefônica";
+          $scope.contatos = [
+            { nome: "Pedro", telefone: "99998888" },
+            { nome: "Ana", telefone: "99998877" },
+            { nome: "Maria", telefone: "99998866" },
+          ];
+          $scope.adicionarContato = function (contato) {
+            $scope.contatos.push(angular.copy(contato));
+          };
         });
     </script>
   </head>
   <body ng-controller="listaTelefonicaCtrl">
     <div class="p-5 mb-4 bg-light rounded-3">
-      <h4 ng-bind="app"></h4>
+      <h3>{{app}}</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Nome</th>
+          <th>Telefone</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="contato in contatos">
+            <td>{{contato.nome}}</td>
+            <td>{{contato.telefone}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+      <label for="nome">Nome</label>
+      <input
+        class="form-control"
+        type="text"
+        id="nome"
+        placeholder="Digite seu nome..."
+        ng-model="contato.nome"
+      />
+      <label for="telefone">Telefone</label>
+      <input
+        class="form-control"
+        type="text"
+        id="telefone"
+        placeholder="Digite seu telefone..."
+        ng-model="contato.telefone"
+      />
+
+      <div class="d-grid">
+        <button
+          type="button"
+          class="btn btn-primary"
+          ng-click="adicionarContato(contato)"
+        >
+          Adicionar Contato
+        </button>
+      </div>
     </div>
+    {{nome}} {{telefone}}
   </body>
 </html>
