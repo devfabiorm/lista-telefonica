@@ -59,6 +59,7 @@
           $scope.adicionarContato = function (contato) {
             $scope.contatos.push(angular.copy(contato));
             delete $scope.contato;
+            $scope.contatoForm.$setPristine();
           };
 
           $scope.deletarContatos = function (contatos) {
@@ -141,11 +142,17 @@
         </select>
       </form>
 
-      <div ng-show="contatoForm.nome.$invalid" class="alert alert-danger">
+      <div
+        ng-show="contatoForm.nome.$invalid && contatoForm.nome.$dirty"
+        class="alert alert-danger"
+      >
         Por favor, preencha o campo nome!
       </div>
 
-      <div ng-show="contatoForm.telefone.$invalid" class="alert alert-danger">
+      <div
+        ng-show="contatoForm.telefone.$invalid && contatoForm.telefone.$dirty"
+        class="alert alert-danger"
+      >
         Por favor, preencha o campo nome!
       </div>
 
