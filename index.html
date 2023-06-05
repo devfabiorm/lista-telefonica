@@ -60,6 +60,19 @@
             $scope.contatos.push(angular.copy(contato));
             delete $scope.contato;
           };
+
+          $scope.deletarContatos = function (contatos) {
+            $scope.contatos = contatos.filter(function (contato) {
+              if (!contato.selecionado) return contato;
+            });
+          };
+
+          $scope.isContatoSelecionado = function (contatos) {
+            return contatos.some(function (contato) {
+              return contato.selecionado;
+            });
+          };
+
           $scope.classe1 = "selecionado";
           $scope.classe2 = "negrito";
         });
@@ -77,7 +90,7 @@
         </thead>
         <tbody>
           <tr
-            ng-class="{selecionado: contato.selecionado, negrito: contato.selecionado}"
+            ng-class="{'selecionado negrito': contato.selecionado}"
             ng-repeat="contato in contatos"
           >
             <td><input type="checkbox" ng-model="contato.selecionado" /></td>
@@ -115,12 +128,21 @@
         <option value="">Selecione um operadora</option>
       </select>
 
-      <div class="d-grid">
+      <div class="d-grid gap-2">
         <button
           type="button"
           class="btn btn-primary"
           ng-click="adicionarContato(contato)"
           ng-disabled="!contato.nome || !contato.telefone"
+        >
+          Adicionar Contato
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          ng-click="deletarContatos(contatos)"
+          ng-disabled="!isContatoSelecionado(contatos)"
         >
           Adicionar Contato
         </button>
