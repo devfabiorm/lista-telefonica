@@ -93,6 +93,11 @@
             });
           };
 
+          $scope.aplicarFiltroPor = function (campo) {
+            $scope.filtrarPor = campo;
+            $scope.direcaoDaOrdenacao = !$scope.direcaoDaOrdenacao;
+          };
+
           $scope.classe1 = "selecionado";
           $scope.classe2 = "negrito";
         });
@@ -110,8 +115,10 @@
       <table class="table">
         <thead ng-show="contatos.length > 0">
           <th></th>
-          <th>Nome</th>
-          <th>Telefone</th>
+          <th><a href="" ng-click="aplicarFiltroPor('nome')">Nome</a></th>
+          <th>
+            <a href="" ng-click="aplicarFiltroPor('telefone')">Telefone</a>
+          </th>
           <th>Operadora</th>
           <th>Data</th>
           <th></th>
@@ -119,7 +126,7 @@
         <tbody>
           <tr
             ng-class="{'selecionado negrito': contato.selecionado}"
-            ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:'nome'"
+            ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:filtrarPor:direcaoDaOrdenacao"
           >
             <td><input type="checkbox" ng-model="contato.selecionado" /></td>
             <td>{{contato.nome | uppercase}}</td>
@@ -165,7 +172,7 @@
           title="operadoras"
           id="operadoras"
           ng-model="contato.operadora"
-          ng-options="operadora.nome for operadora in operadoras"
+          ng-options="operadora.nome for operadora in operadoras | orderBy:'nome'"
         >
           <option value="">Selecione um operadora</option>
         </select>
