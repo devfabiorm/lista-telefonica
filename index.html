@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       .p-5.mb-4.bg-light.rounded-3 {
-        width: 400px;
+        width: 800px;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
@@ -46,9 +46,27 @@
         .controller("listaTelefonicaCtrl", function ($scope) {
           $scope.app = "Lista Telefônica";
           $scope.contatos = [
-            { nome: "Pedro", telefone: "99998888", cor: "green" },
-            { nome: "Ana", telefone: "99998877", cor: "yellow" },
-            { nome: "Maria", telefone: "99998866", cor: "red" },
+            {
+              nome: "Pedro",
+              telefone: "99998888",
+              operadora: { nome: "Oi", codigo: 14, categoria: "Celular" },
+              data: new Date(),
+              cor: "Orange",
+            },
+            {
+              nome: "Ana",
+              telefone: "99998877",
+              operadora: { nome: "Vivo", codigo: 15, categoria: "Celular" },
+              data: new Date(),
+              cor: "Green",
+            },
+            {
+              nome: "Maria",
+              telefone: "99998866",
+              operadora: { nome: "Tim", codigo: 41, categoria: "Celular" },
+              data: new Date(),
+              cor: "Blue",
+            },
           ];
           $scope.operadoras = [
             { nome: "Oi", codigo: 14, categoria: "Celular" },
@@ -83,23 +101,31 @@
   <body ng-controller="listaTelefonicaCtrl">
     <div class="p-5 mb-4 bg-light rounded-3">
       <h3>{{app}}</h3>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="O que vc está buscando?"
+        ng-model="criterioDeBusca"
+      />
       <table class="table">
         <thead ng-show="contatos.length > 0">
           <th></th>
           <th>Nome</th>
           <th>Telefone</th>
           <th>Operadora</th>
+          <th>Data</th>
           <th></th>
         </thead>
         <tbody>
           <tr
             ng-class="{'selecionado negrito': contato.selecionado}"
-            ng-repeat="contato in contatos"
+            ng-repeat="contato in contatos | filter:criterioDeBusca"
           >
             <td><input type="checkbox" ng-model="contato.selecionado" /></td>
-            <td>{{contato.nome}}</td>
+            <td>{{contato.nome | uppercase}}</td>
             <td>{{contato.telefone}}</td>
-            <td>{{contato.operadora.nome}}</td>
+            <td>{{contato.operadora.nome | lowercase}}</td>
+            <td>{{contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
             <td>
               <div
                 style="width: 20px; height: 20px"
@@ -145,10 +171,15 @@
         </select>
       </form>
 
-      <div ng-messages="contatoForm.nome.$error" class="alert alert-danger">
-        <div ng-message="required">Por favor, preencha o campo nome!</div>
+      <div
+        ng-show="contatoForm.nome.$dirty"
+        ng-messages="contatoForm.nome.$error"
+      >
+        <div ng-message="required" class="alert alert-danger">
+          Por favor, preencha o campo nome!
+        </div>
 
-        <div ng-message="minlength">
+        <div ng-message="minlength" class="alert alert-danger">
           O campo nome deve ter no mínimo 10 caracteres.
         </div>
       </div>
