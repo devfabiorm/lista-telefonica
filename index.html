@@ -108,39 +108,53 @@
         </tbody>
       </table>
       <hr />
-      <label for="nome">Nome</label>
-      <input
-        class="form-control"
-        type="text"
-        id="nome"
-        placeholder="Digite seu nome..."
-        ng-model="contato.nome"
-      />
-      <label for="telefone">Telefone</label>
-      <input
-        class="form-control"
-        type="text"
-        id="telefone"
-        placeholder="Digite seu telefone..."
-        ng-model="contato.telefone"
-      />
+      <form name="contatoForm">
+        <label for="nome">Nome</label>
+        <input
+          class="form-control"
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Digite seu nome..."
+          ng-model="contato.nome"
+          ng-required="true"
+        />
+        <label for="telefone">Telefone</label>
+        <input
+          class="form-control"
+          type="text"
+          id="telefone"
+          name="telefone"
+          placeholder="Digite seu telefone..."
+          ng-model="contato.telefone"
+          ng-required="true"
+        />
 
-      <select
-        class="form-control"
-        title="operadoras"
-        id="operadoras"
-        ng-model="contato.operadora"
-        ng-options="operadora.nome for operadora in operadoras"
-      >
-        <option value="">Selecione um operadora</option>
-      </select>
+        <select
+          class="form-control"
+          title="operadoras"
+          id="operadoras"
+          ng-model="contato.operadora"
+          ng-options="operadora.nome for operadora in operadoras"
+        >
+          <option value="">Selecione um operadora</option>
+        </select>
+      </form>
+
+      <div ng-show="contatoForm.nome.$invalid" class="alert alert-danger">
+        Por favor, preencha o campo nome!
+      </div>
+
+      <div ng-show="contatoForm.telefone.$invalid" class="alert alert-danger">
+        Por favor, preencha o campo nome!
+      </div>
 
       <div class="d-grid gap-2">
         <button
           type="button"
           class="btn btn-primary"
           ng-click="adicionarContato(contato)"
-          ng-disabled="!contato.nome || !contato.telefone"
+          ng-disabled="contatoForm.$invalid"
         >
           Adicionar Contato
         </button>
