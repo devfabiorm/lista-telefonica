@@ -51,6 +51,7 @@
   <body ng-controller="listaTelefonicaCtrl">
     <div class="p-5 mb-4 bg-light rounded-3">
       <h3>{{app}}</h3>
+      {{contato}}
       <table class="table table-striped">
         <thead>
           <th>Nome</th>
@@ -88,7 +89,7 @@
         title="operadoras"
         id="operadoras"
         ng-model="contato.operadora"
-        ng-options="operadora.nome for operadora in operadoras"
+        ng-options="operadora.codigo as operadora.nome for operadora in operadoras"
       >
         <option value="">Selecione um operadora</option>
       </select>
