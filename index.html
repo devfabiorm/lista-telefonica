@@ -149,7 +149,7 @@
           type="button"
           class="btn btn-danger"
           ng-click="deletarContatos(contatos)"
-          ng-show="isContatoSelecionado(contatos)"
+          ng-hide="!isContatoSelecionado(contatos)"
         >
           Adicionar Contato
         </button>
