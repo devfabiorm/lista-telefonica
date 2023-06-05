@@ -28,6 +28,11 @@
       .negrito {
         font-weight: bold;
       }
+
+      table tr td,
+      table tr th {
+        background-color: rgba(210, 130, 240, 0) !important;
+      }
     </style>
 
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.css" />
@@ -65,12 +70,17 @@
       <h3>{{app}}</h3>
       <table class="table">
         <thead>
+          <th></th>
           <th>Nome</th>
           <th>Telefone</th>
           <th>Operadora</th>
         </thead>
         <tbody>
-          <tr ng-class="[classe1, classe2]" ng-repeat="contato in contatos">
+          <tr
+            ng-class="{selecionado: contato.selecionado, negrito: contato.selecionado}"
+            ng-repeat="contato in contatos"
+          >
+            <td><input type="checkbox" ng-model="contato.selecionado" /></td>
             <td>{{contato.nome}}</td>
             <td>{{contato.telefone}}</td>
             <td>{{contato.operadora.nome}}</td>
