@@ -44,11 +44,11 @@
       angular.module("listaTelefonica", ["ngMessages"]);
       angular
         .module("listaTelefonica")
-        .controller("listaTelefonicaCtrl", function ($scope) {
+        .controller("listaTelefonicaCtrl", function ($scope, $filter) {
           $scope.app = "Lista Telefônica";
           $scope.contatos = [
             {
-              nome: "Pedro",
+              nome: $filter("uppercase")("Pedro"),
               telefone: "99998888",
               operadora: { nome: "Oi", codigo: 14, categoria: "Celular" },
               data: new Date(),
@@ -130,7 +130,7 @@
             ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:filtrarPor:direcaoDaOrdenacao"
           >
             <td><input type="checkbox" ng-model="contato.selecionado" /></td>
-            <td>{{contato.nome | uppercase | limitTo:3}}</td>
+            <td>{{contato.nome}}</td>
             <td>{{contato.telefone}}</td>
             <td>{{contato.operadora.nome | lowercase}}</td>
             <td>{{contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
