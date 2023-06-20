@@ -2,7 +2,7 @@ angular
   .module("listaTelefonica")
   .controller(
     "listaTelefonicaCtrl",
-    function ($scope, contatosAPI, operadorasAPI) {
+    function ($scope, contatosAPI, operadorasAPI, serialGenerator) {
       $scope.app = "Lista Telefônica";
       $scope.contatos = [];
       $scope.operadoras = [];
@@ -20,13 +20,7 @@ angular
       };
 
       $scope.adicionarContato = function (contato) {
-        let serial = "";
-
-        while (serial.length < 20) {
-          serial += String.fromCharCode(Math.floor(Math.random() * 64) + 32);
-        }
-
-        contato.serial = serial;
+        contato.serial = serialGenerator.generate();
         contato.data = new Date();
         contatosAPI.saveContatoAPI(contato).then(function (res) {
           delete $scope.contato;
