@@ -1,0 +1,28 @@
+.p-5.mb-4.bg-light.rounded-3 {
+  width: 800px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+table {
+  margin-top: 20px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.selecionado {
+  background-color: yellow;
+}
+
+.negrito {
+  font-weight: bold;
+}
+
+table tr td,
+table tr th {
+  background-color: rgba(210, 130, 240, 0) !important;
+}

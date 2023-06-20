@@ -4,105 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      .p-5.mb-4.bg-light.rounded-3 {
-        width: 800px;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 20px;
-      }
-
-      table {
-        margin-top: 20px;
-      }
-
-      .form-control {
-        margin-bottom: 10px;
-      }
-
-      .selecionado {
-        background-color: yellow;
-      }
-
-      .negrito {
-        font-weight: bold;
-      }
-
-      table tr td,
-      table tr th {
-        background-color: rgba(210, 130, 240, 0) !important;
-      }
-    </style>
-
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="css/app.css" />
     <title>Lista Telefonica</title>
     <script src="lib/angular/angular.js"></script>
+    <script src="js/app.js"></script>
     <script src="lib/angular/angular-locale_pt-br.js"></script>
     <script src="lib/angular/angular-messages.js"></script>
-    <script>
-      angular.module("listaTelefonica", ["ngMessages"]);
-      angular
-        .module("listaTelefonica")
-        .controller("listaTelefonicaCtrl", function ($scope, $filter) {
-          $scope.app = "Lista Telefônica";
-          $scope.contatos = [
-            {
-              nome: $filter("uppercase")("Pedro"),
-              telefone: "99998888",
-              operadora: { nome: "Oi", codigo: 14, categoria: "Celular" },
-              data: new Date(),
-              cor: "Orange",
-            },
-            {
-              nome: "Ana",
-              telefone: "99998877",
-              operadora: { nome: "Vivo", codigo: 15, categoria: "Celular" },
-              data: new Date(),
-              cor: "Green",
-            },
-            {
-              nome: "Maria",
-              telefone: "99998866",
-              operadora: { nome: "Tim", codigo: 41, categoria: "Celular" },
-              data: new Date(),
-              cor: "Blue",
-            },
-          ];
-          $scope.operadoras = [
-            { nome: "Oi", codigo: 14, categoria: "Celular", preco: 2 },
-            { nome: "Vivo", codigo: 15, categoria: "Celular", preco: 1 },
-            { nome: "Tim", codigo: 41, categoria: "Celular", preco: 3 },
-            { nome: "GVT", codigo: 25, categoria: "Fixo", preco: 1 },
-            { nome: "Embratel", codigo: 21, categoria: "Fixo", preco: 2 },
-          ];
-          $scope.adicionarContato = function (contato) {
-            $scope.contatos.push(angular.copy(contato));
-            delete $scope.contato;
-            $scope.contatoForm.$setPristine();
-          };
-
-          $scope.deletarContatos = function (contatos) {
-            $scope.contatos = contatos.filter(function (contato) {
-              if (!contato.selecionado) return contato;
-            });
-          };
-
-          $scope.isContatoSelecionado = function (contatos) {
-            return contatos.some(function (contato) {
-              return contato.selecionado;
-            });
-          };
-
-          $scope.aplicarFiltroPor = function (campo) {
-            $scope.filtrarPor = campo;
-            $scope.direcaoDaOrdenacao = !$scope.direcaoDaOrdenacao;
-          };
-
-          $scope.classe1 = "selecionado";
-          $scope.classe2 = "negrito";
-        });
-    </script>
+    <script src="js/controllers/listaTelefonicaController.js"></script>
   </head>
   <body ng-controller="listaTelefonicaCtrl">
     <div class="p-5 mb-4 bg-light rounded-3">
@@ -226,6 +135,6 @@
         </button>
       </div>
     </div>
-    <div ng-include="'footer.html'"></div>
+    <div ng-include="'view/footer.html'"></div>
   </body>
 </html>
