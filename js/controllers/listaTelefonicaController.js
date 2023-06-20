@@ -2,7 +2,7 @@ angular
   .module("listaTelefonica")
   .controller(
     "listaTelefonicaCtrl",
-    function ($scope, $http, uppercaseFilter, contatosAPI) {
+    function ($scope, contatosAPI, operadorasAPI) {
       $scope.app = "Lista Telefônica";
       $scope.contatos = [];
       $scope.operadoras = [];
@@ -14,11 +14,9 @@ angular
       };
 
       var carregarOperadoras = function () {
-        $http
-          .get("http://localhost:3412/operadoras")
-          .then(function (res, status) {
-            $scope.operadoras = res.data;
-          });
+        operadorasAPI.getOperadoras().then(function (res, status) {
+          $scope.operadoras = res.data;
+        });
       };
 
       $scope.adicionarContato = function (contato) {
