@@ -20,11 +20,12 @@
     <script src="js/value/configValue.js"></script>
     <script src="js/filters/nameFilter.js"></script>
     <script src="js/filters/ellipsisFilter.js"></script>
+    <script src="js/directives/uiAlertDirective.js"></script>
   </head>
   <body ng-controller="listaTelefonicaCtrl">
     <div class="p-5 mb-4 bg-light rounded-3">
       <h3>{{app}}</h3>
-
+      <div ui-alert></div>
       <div class="ui-alert">
         <div class="ui-alert-title">Ops, aconteceu um problema!</div>
         <div class="ui-alert-message">{{error}}</div>
