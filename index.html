@@ -25,7 +25,8 @@
   <body ng-controller="listaTelefonicaCtrl">
     <div class="p-5 mb-4 bg-light rounded-3">
       <h3>{{app}}</h3>
-      <div ui-alert></div>
+      {{$id}}
+      <ui-alert title="Ops, aconteceu um problema!">{{error}}</ui-alert>
       <input
         class="form-control"
         type="text"
