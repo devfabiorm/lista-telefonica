@@ -8,9 +8,14 @@ angular
       $scope.operadoras = [];
 
       var carregarContatos = function () {
-        contatosAPI.getContatosAPI().then(function (res, status) {
-          $scope.contatos = res.data;
-        });
+        contatosAPI
+          .getContatosAPI()
+          .then(function (res, status) {
+            $scope.contatos = res.data;
+          })
+          .catch(function (res) {
+            $scope.error = "Não foi possível carregar dados!";
+          });
       };
 
       var carregarOperadoras = function () {
