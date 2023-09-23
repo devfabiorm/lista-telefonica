@@ -6,9 +6,6 @@ angular
       $scope.app = "Lista Telefônica";
       $scope.contatos = [];
       $scope.operadoras = [];
-      $scope.contato = {
-        data: 1674183600000,
-      };
 
       var carregarContatos = function () {
         contatosAPI

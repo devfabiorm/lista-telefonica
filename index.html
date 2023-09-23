@@ -22,10 +22,28 @@
     <script src="js/filters/ellipsisFilter.js"></script>
     <script src="js/directives/uiAlertDirective.js"></script>
     <script src="js/directives/uiDateDirective.js"></script>
+    <script src="js/directives/uiFocusDirective.js"></script>
+    <script src="js/directives/uiAccordionDirective.js"></script>
   </head>
   <body ng-controller="listaTelefonicaCtrl">
     <div class="p-5 mb-4 bg-light rounded-3">
       <h3>{{app}}</h3>
+
+      <ui-accordions>
+        <ui-accordion title="Accordio 1">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+          pariatur reprehenderit sed ipsa, dolore itaque dicta, iusto, vel
+          perspiciatis non sit praesentium. Repudiandae adipisci veniam ad
+          inventore assumenda ex ipsam!
+        </ui-accordion>
+        <ui-accordion title="Accordio 2">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor
+          laudantium modi sequi magni ullam unde? Sapiente libero inventore
+          dicta voluptatibus aut asperiores recusandae corrupti velit soluta et
+          quo, id nisi?
+        </ui-accordion>
+      </ui-accordions>
+      <hr />
 
       <ui-alert ng-show="!!error" title="Ops, aconteceu um problema!"
         >{{error}}</ui-alert
@@ -53,7 +71,9 @@
             ng-class="{'selecionado negrito': contato.selecionado}"
             ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:filtrarPor:direcaoDaOrdenacao"
           >
-            <td><input type="checkbox" ng-model="contato.selecionado" /></td>
+            <td>
+              <input type="checkbox" ng-model="contato.selecionado" />
+            </td>
             <td>{{contato.serial}}</td>
             <td>{{contato.nome | name | ellipsis:10 }}</td>
             <td>{{contato.telefone}}</td>
@@ -80,6 +100,8 @@
           ng-model="contato.nome"
           ng-required="true"
           ng-minlength="10"
+          ui-focus
+          focused="true"
         />
         <label for="telefone">Telefone</label>
         <input

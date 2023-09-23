@@ -15,3 +15,27 @@
 .ui-alert-message {
   color: #af4341;
 }
+
+.ui-accordion-title {
+  border: 1px solid #cccccc;
+  cursor: pointer;
+  background: -moz-linear-gradient(to bottom, #cccccc, #eeeeee);
+  background: linear-gradient(to bottom, #cccccc, #eeeeee);
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px 5px 0px 0px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.ui-accordion-content {
+  border: 1px dashed #cccccc;
+  border-top: 0;
+  border-radius: 0px 0px 5px 5px;
+  background-color: #ffffff;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: left;
+}
