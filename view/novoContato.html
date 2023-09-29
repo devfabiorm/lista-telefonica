@@ -1,0 +1,79 @@
+<div class="p-5 mb-4 bg-light rounded-3">
+  <form name="contatoForm">
+    <label for="nome">Nome</label>
+    <input
+      class="form-control"
+      type="text"
+      id="nome"
+      name="nome"
+      placeholder="Digite seu nome..."
+      ng-model="contato.nome"
+      ng-required="true"
+      ng-minlength="10"
+      ui-focus
+      focused="true"
+    />
+    <label for="telefone">Telefone</label>
+    <input
+      class="form-control"
+      type="text"
+      id="telefone"
+      name="telefone"
+      placeholder="Digite seu telefone..."
+      ng-model="contato.telefone"
+      ng-required="true"
+      ng-pattern="/^\d{4,5}-\d{4}$/"
+    />
+
+    <input
+      type="text"
+      class="form-control"
+      name="data"
+      ng-model="contato.data"
+      placeholder="Data"
+      ui-date
+    />
+
+    <select
+      class="form-control"
+      title="operadoras"
+      id="operadoras"
+      ng-model="contato.operadora"
+      ng-options="operadora.nome + ' (' + (operadora.preco | currency) + ')' for operadora in operadoras | orderBy:'nome'"
+    >
+      <option value="">Selecione um operadora</option>
+    </select>
+  </form>
+
+  <div ng-show="contatoForm.nome.$dirty" ng-messages="contatoForm.nome.$error">
+    <div ng-message="required" class="alert alert-danger">
+      Por favor, preencha o campo nome!
+    </div>
+
+    <div ng-message="minlength" class="alert alert-danger">
+      O campo nome deve ter no mínimo 10 caracteres.
+    </div>
+  </div>
+
+  <div
+    ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preencha o campo nome!
+  </div>
+
+  <div
+    ng-show="contatoForm.telefone.$error.pattern && contatoForm.telefone.$dirty"
+    class="alert alert-danger"
+  >
+    O telefone deve estar no formato DDDDD-DDDD!
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary btn-block"
+    ng-click="adicionarContato(contato)"
+    ng-disabled="contatoForm.$invalid"
+  >
+    Adicionar Contato
+  </button>
+</div>
